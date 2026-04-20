@@ -6,13 +6,25 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { CITY, COMPANY_NAME, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/whatsapp";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Contact = () => {
+  const { profile } = useAuth();
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
 
   useEffect(() => {
     document.title = `Contato — ${COMPANY_NAME}`;
   }, []);
+
+  useEffect(() => {
+    if (profile) {
+      setForm((f) => ({
+        ...f,
+        name: f.name || profile.full_name || "",
+        phone: f.phone || profile.phone || "",
+      }));
+    }
+  }, [profile]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
