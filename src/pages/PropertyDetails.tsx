@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Button } from "@/components/ui/button";
 import { fetchProperty, formatPrice, propertyTypeLabel, propertyImageUrls, Property } from "@/lib/properties";
-import { whatsappPropertyLink, COMPANY_NAME } from "@/lib/whatsapp";
+import { whatsappLink, COMPANY_NAME } from "@/lib/whatsapp";
 import { useAuth } from "@/contexts/AuthContext";
 
 const PropertyDetails = () => {
@@ -165,7 +165,7 @@ const PropertyDetails = () => {
               </div>
 
               <a
-                href={whatsappPropertyLink(greeting)}
+                href={whatsappLink(greeting)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full bg-whatsapp text-whatsapp-foreground font-semibold py-4 rounded-xl shadow-lg hover:opacity-90 transition-smooth"
