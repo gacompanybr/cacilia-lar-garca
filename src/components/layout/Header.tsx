@@ -1,9 +1,18 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, Phone, X } from "lucide-react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { LayoutDashboard, LogOut, Menu, Phone, User as UserIcon, X } from "lucide-react";
 import { useState } from "react";
 import logo from "@/assets/logo.jpeg";
 import { COMPANY_NAME, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { to: "/", label: "Início" },
@@ -14,7 +23,15 @@ const navItems = [
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
-  const location = useLocation();
+  const navigate = useNavigate();
+  const { user, profile, isCorretor, signOut } = useAuth();
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate("/");
+  };
+
+  const initial = (profile?.full_name?.[0] ?? user?.email?.[0] ?? "U").toUpperCase();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
@@ -45,23 +62,72 @@ export const Header = () => {
           ))}
         </nav>
 
-        <a
-          href={whatsappLink()}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-brand-foreground shadow-brand transition-smooth hover:scale-105"
-        >
-          <Phone className="h-4 w-4" />
-          {WHATSAPP_DISPLAY}
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden lg:inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-brand-foreground shadow-brand transition-smooth hover:scale-105"
+          >
+            <Phone className="h-4 w-4" />
+            {WHATSAPP_DISPLAY}
+          </a>
 
-        <button
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          className="md:hidden p-2 rounded-md hover:bg-muted"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+          {/* User menu */}
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  aria-label="Menu do usuário"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-brand text-brand-foreground font-bold shadow-brand hover:scale-105 transition-smooth"
+                >
+                  {initial}
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 z-50 bg-popover">
+                <DropdownMenuLabel>
+                  <div className="font-semibold truncate">{profile?.full_name || "Minha conta"}</div>
+                  <div className="text-xs text-muted-foreground truncate">{user.email}</div>
+                  {isCorretor && (
+                    <span className="mt-1 inline-block text-[10px] font-bold uppercase bg-brand text-brand-foreground px-1.5 py-0.5 rounded">
+                      Corretor
+                    </span>
+                  )}
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {isCorretor && (
+                  <DropdownMenuItem onClick={() => navigate("/painel")}>
+                    <LayoutDashboard className="h-4 w-4 mr-2" /> Painel
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem onClick={() => navigate("/minha-conta")}>
+                  <UserIcon className="h-4 w-4 mr-2" /> Minha conta
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive">
+                  <LogOut className="h-4 w-4 mr-2" /> Sair
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link
+              to="/auth"
+              aria-label="Entrar"
+              title="Entrar"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border hover:border-brand hover:text-brand transition-smooth"
+            >
+              <UserIcon className="h-5 w-5" />
+            </Link>
+          )}
+
+          <button
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            className="md:hidden p-2 rounded-md hover:bg-muted"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {open && (

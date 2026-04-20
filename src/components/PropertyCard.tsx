@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { Bed, Bath, Car, Maximize, MapPin } from "lucide-react";
-import { Property, formatPrice, propertyTypeLabel } from "@/data/properties";
+import { Property, formatPrice, propertyTypeLabel, propertyImageUrls } from "@/lib/properties";
 
 interface PropertyCardProps {
   property: Property;
 }
 
 export const PropertyCard = ({ property }: PropertyCardProps) => {
+  const cover = propertyImageUrls(property)[0];
   return (
     <Link
       to={`/imovel/${property.id}`}
@@ -14,7 +15,7 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
         <img
-          src={property.images[0]}
+          src={cover}
           alt={property.title}
           loading="lazy"
           className="h-full w-full object-cover transition-smooth group-hover:scale-105"

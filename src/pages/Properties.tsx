@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { PropertyCard } from "@/components/PropertyCard";
 import { Button } from "@/components/ui/button";
-import { properties, PropertyType } from "@/data/properties";
+import { fetchProperties, Property, PropertyType } from "@/lib/properties";
 import { COMPANY_NAME } from "@/lib/whatsapp";
 
 const types: { value: PropertyType | ""; label: string }[] = [
@@ -28,6 +28,8 @@ const priceRanges = [
 const Properties = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [showFilters, setShowFilters] = useState(false);
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const type = searchParams.get("type") || "";
   const city = searchParams.get("city") || "";
@@ -35,6 +37,9 @@ const Properties = () => {
 
   useEffect(() => {
     document.title = `Imóveis — ${COMPANY_NAME}`;
+    fetchProperties()
+      .then(setProperties)
+      .finally(() => setLoading(false));
   }, []);
 
   const filtered = useMemo(() => {
@@ -47,7 +52,7 @@ const Properties = () => {
       }
       return true;
     });
-  }, [type, city, price]);
+  }, [properties, type, city, price]);
 
   const updateParam = (key: string, value: string) => {
     const next = new URLSearchParams(searchParams);
@@ -78,7 +83,6 @@ const Properties = () => {
           ))}
         </div>
       </div>
-
       <div>
         <label className="block text-xs font-bold uppercase text-muted-foreground mb-2">Cidade</label>
         <input
@@ -88,7 +92,6 @@ const Properties = () => {
           className="w-full h-11 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
         />
       </div>
-
       <div>
         <label className="block text-xs font-bold uppercase text-muted-foreground mb-2">Faixa de preço</label>
         <select
@@ -101,7 +104,6 @@ const Properties = () => {
           ))}
         </select>
       </div>
-
       {(type || city || price) && (
         <Button variant="outline" onClick={clear} className="w-full">
           <X className="h-4 w-4 mr-2" /> Limpar filtros
@@ -123,7 +125,6 @@ const Properties = () => {
 
       <section className="py-12 flex-1">
         <div className="container-custom grid gap-8 lg:grid-cols-[280px_1fr]">
-          {/* Sidebar desktop */}
           <aside className="hidden lg:block">
             <div className="sticky top-28 bg-card rounded-xl p-6 shadow-card">
               <h2 className="font-bold text-lg mb-6 flex items-center gap-2">
@@ -133,7 +134,6 @@ const Properties = () => {
             </div>
           </aside>
 
-          {/* Mobile filter toggle */}
           <div className="lg:hidden">
             <Button variant="outline" onClick={() => setShowFilters(!showFilters)} className="w-full">
               <SlidersHorizontal className="h-4 w-4 mr-2" /> {showFilters ? "Ocultar filtros" : "Mostrar filtros"}
@@ -145,12 +145,16 @@ const Properties = () => {
 
           <div>
             <p className="text-sm text-muted-foreground mb-6">
-              <span className="font-semibold text-foreground">{filtered.length}</span> imóvel(eis) encontrado(s)
+              {loading ? "Carregando..." : (
+                <><span className="font-semibold text-foreground">{filtered.length}</span> imóvel(eis) encontrado(s)</>
+              )}
             </p>
-            {filtered.length === 0 ? (
+            {!loading && filtered.length === 0 ? (
               <div className="text-center py-20 bg-card rounded-xl">
-                <p className="text-muted-foreground">Nenhum imóvel encontrado com esses filtros.</p>
-                <Button onClick={clear} className="mt-4">Limpar filtros</Button>
+                <p className="text-muted-foreground">Nenhum imóvel encontrado.</p>
+                {(type || city || price) && (
+                  <Button onClick={clear} className="mt-4">Limpar filtros</Button>
+                )}
               </div>
             ) : (
               <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
