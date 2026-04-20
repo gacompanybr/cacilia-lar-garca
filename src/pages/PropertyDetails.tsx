@@ -5,17 +5,36 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Button } from "@/components/ui/button";
-import { properties, formatPrice, propertyTypeLabel } from "@/data/properties";
+import { fetchProperty, formatPrice, propertyTypeLabel, propertyImageUrls, Property } from "@/lib/properties";
 import { whatsappPropertyLink, COMPANY_NAME } from "@/lib/whatsapp";
+import { useAuth } from "@/contexts/AuthContext";
 
 const PropertyDetails = () => {
   const { id } = useParams();
-  const property = properties.find((p) => p.id === id);
+  const [property, setProperty] = useState<Property | null>(null);
+  const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
+  const { profile } = useAuth();
 
   useEffect(() => {
-    if (property) document.title = `${property.title} — ${COMPANY_NAME}`;
-  }, [property]);
+    if (!id) return;
+    fetchProperty(id)
+      .then((p) => {
+        setProperty(p);
+        if (p) document.title = `${p.title} — ${COMPANY_NAME}`;
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <div className="flex-1 container-custom py-32 text-center text-muted-foreground">Carregando...</div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!property) {
     return (
@@ -30,6 +49,11 @@ const PropertyDetails = () => {
     );
   }
 
+  const images = propertyImageUrls(property);
+  const greeting = profile?.full_name
+    ? `Olá, sou ${profile.full_name}. Tenho interesse neste imóvel: ${property.title}`
+    : `Olá, tenho interesse neste imóvel: ${property.title}`;
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -41,14 +65,13 @@ const PropertyDetails = () => {
       </div>
 
       <section className="container-custom pb-12">
-        {/* Gallery */}
         <div className="grid gap-3 md:grid-cols-[1fr_auto] mb-10">
           <div className="relative rounded-xl overflow-hidden bg-muted aspect-[16/10]">
-            <img src={property.images[active]} alt={property.title} className="h-full w-full object-cover" />
+            <img src={images[active]} alt={property.title} className="h-full w-full object-cover" />
           </div>
-          {property.images.length > 1 && (
+          {images.length > 1 && (
             <div className="flex md:flex-col gap-3 md:max-h-[500px] overflow-auto">
-              {property.images.map((img, i) => (
+              {images.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setActive(i)}
@@ -79,7 +102,6 @@ const PropertyDetails = () => {
               <span>{property.neighborhood ? `${property.neighborhood}, ` : ""}{property.city}</span>
             </div>
 
-            {/* Specs */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
               {property.bedrooms != null && (
                 <div className="bg-secondary rounded-xl p-4 text-center">
@@ -133,7 +155,6 @@ const PropertyDetails = () => {
             )}
           </div>
 
-          {/* CTA card */}
           <aside className="lg:sticky lg:top-28 self-start">
             <div className="bg-card rounded-2xl shadow-card-hover p-6 border border-border">
               <div className="text-sm text-muted-foreground mb-1">
@@ -144,7 +165,7 @@ const PropertyDetails = () => {
               </div>
 
               <a
-                href={whatsappPropertyLink(property.title)}
+                href={whatsappPropertyLink(greeting)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full bg-whatsapp text-whatsapp-foreground font-semibold py-4 rounded-xl shadow-lg hover:opacity-90 transition-smooth"
@@ -154,7 +175,9 @@ const PropertyDetails = () => {
               </a>
 
               <p className="text-xs text-muted-foreground text-center mt-4">
-                Atendimento rápido via WhatsApp. Tire dúvidas e agende uma visita.
+                {profile?.full_name
+                  ? `Mensagem assinada como ${profile.full_name}`
+                  : "Atendimento rápido via WhatsApp"}
               </p>
             </div>
           </aside>
