@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, MapPin, Phone, Mail } from "lucide-react";
-import logo from "@/assets/logo.jpeg";
+import logo from "@/assets/logo.png";
 import { COMPANY_FULL, CRECI, CITY, WHATSAPP_DISPLAY, FACEBOOK_URL, whatsappLink } from "@/lib/whatsapp";
 
 export const Footer = () => {
@@ -9,7 +9,7 @@ export const Footer = () => {
       <div className="container-custom py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3 mb-4">
-            <img src={logo} alt={COMPANY_FULL} className="h-14 w-14 rounded-lg object-cover" />
+            <img src={logo} alt={COMPANY_FULL} className="h-14 w-14 object-contain" />
             <div>
               <div className="font-display font-bold text-lg uppercase">{COMPANY_FULL}</div>
               <div className="text-xs text-brand">CRECI: {CRECI}</div>
