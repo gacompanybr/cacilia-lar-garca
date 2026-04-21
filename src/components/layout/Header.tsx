@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { LayoutDashboard, LogOut, Menu, Phone, User as UserIcon, X } from "lucide-react";
 import { useState } from "react";
-import logo from "@/assets/logo.jpeg";
+import logo from "@/assets/logo.png";
 import { COMPANY_NAME, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
@@ -37,7 +37,7 @@ export const Header = () => {
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container-custom flex h-20 items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <img src={logo} alt={`Logo ${COMPANY_NAME}`} className="h-14 w-14 rounded-lg object-cover" />
+          <img src={logo} alt={`Logo ${COMPANY_NAME}`} className="h-14 w-14 object-contain" />
           <div className="hidden sm:block leading-tight">
             <div className="font-display text-base font-bold uppercase tracking-wide">{COMPANY_NAME}</div>
             <div className="text-xs text-muted-foreground">Corretora de Imóveis</div>
