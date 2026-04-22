@@ -35,20 +35,20 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
-      <div className="container-custom flex h-20 items-center justify-between gap-6">
-        <Link to="/" className="flex items-center gap-3 shrink-0" onClick={() => setOpen(false)}>
+      <div className="container-custom flex h-24 items-center justify-between gap-6">
+        <Link to="/" className="flex items-center gap-4 shrink-0" onClick={() => setOpen(false)}>
           <img
             src={logo}
             alt={`Logo ${COMPANY_NAME}`}
-            className="h-12 w-12 object-contain"
-            width={512}
-            height={512}
+            className="h-16 w-16 md:h-20 md:w-20 object-contain"
+            width={1024}
+            height={1024}
           />
           <div className="hidden sm:flex flex-col leading-tight">
-            <span className="font-display text-[15px] font-bold uppercase tracking-[0.18em] text-foreground">
+            <span className="font-display text-base md:text-lg font-bold uppercase tracking-[0.18em] text-foreground">
               CACILIA M AREDES
             </span>
-            <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground">
+            <span className="text-[11px] md:text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground mt-0.5">
               Corretora de Imóveis
             </span>
           </div>
