@@ -40,7 +40,7 @@ export const Header = () => {
           <img
             src={logo}
             alt={`Logo ${COMPANY_NAME}`}
-            className="h-16 w-16 md:h-20 md:w-20 object-contain"
+            className="h-20 w-20 md:h-24 md:w-24 object-contain"
             width={1024}
             height={1024}
           />
