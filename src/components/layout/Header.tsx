@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { LayoutDashboard, LogOut, Menu, Phone, User as UserIcon, X } from "lucide-react";
 import { useState } from "react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-icon.png";
 import { COMPANY_NAME, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
@@ -34,17 +34,27 @@ export const Header = () => {
   const initial = (profile?.full_name?.[0] ?? user?.email?.[0] ?? "U").toUpperCase();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="container-custom flex h-20 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <img src={logo} alt={`Logo ${COMPANY_NAME}`} className="h-14 w-14 object-contain" />
-          <div className="hidden sm:block leading-tight">
-            <div className="font-display text-base font-bold uppercase tracking-wide">{COMPANY_NAME}</div>
-            <div className="text-xs text-muted-foreground">Corretora de Imóveis</div>
+    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
+      <div className="container-custom flex h-20 items-center justify-between gap-6">
+        <Link to="/" className="flex items-center gap-3 shrink-0" onClick={() => setOpen(false)}>
+          <img
+            src={logo}
+            alt={`Logo ${COMPANY_NAME}`}
+            className="h-12 w-12 object-contain"
+            width={512}
+            height={512}
+          />
+          <div className="hidden sm:flex flex-col leading-tight">
+            <span className="font-display text-[15px] font-bold uppercase tracking-[0.18em] text-foreground">
+              CACILIA M AREDES
+            </span>
+            <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground">
+              Corretora de Imóveis
+            </span>
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -52,8 +62,11 @@ export const Header = () => {
               end={item.to === "/"}
               className={({ isActive }) =>
                 cn(
-                  "px-4 py-2 rounded-md text-sm font-medium transition-smooth hover:text-brand",
-                  isActive ? "text-brand" : "text-foreground"
+                  "relative px-4 py-2 text-sm font-medium tracking-wide transition-smooth hover:text-brand",
+                  "after:absolute after:left-4 after:right-4 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-brand after:transition-all",
+                  isActive
+                    ? "text-brand after:opacity-100"
+                    : "text-foreground/80 after:opacity-0"
                 )
               }
             >
