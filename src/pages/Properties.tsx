@@ -88,7 +88,7 @@ const Properties = () => {
         <input
           value={city}
           onChange={(e) => updateParam("city", e.target.value)}
-          placeholder="Ex: Garça"
+          placeholder="Ex: Duartina"
           className="w-full h-11 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
         />
       </div>
