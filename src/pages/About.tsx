@@ -35,7 +35,7 @@ const About = () => {
             <p>
               A <strong className="text-foreground">{COMPANY_FULL}</strong> nasceu do desejo de oferecer
               um atendimento verdadeiramente personalizado no mercado imobiliário de {CITY} e região.
-              Com sede em Garça, atuamos com casas, apartamentos, terrenos e imóveis comerciais —
+              Com sede em Duartina, atuamos com casas, apartamentos, terrenos e imóveis comerciais —
               tanto para venda quanto para locação.
             </p>
             <p>
@@ -68,7 +68,7 @@ const About = () => {
               {
                 icon: Eye,
                 title: "Visão",
-                text: "Ser referência em assessoria imobiliária na região de Garça, reconhecida pela excelência e confiança.",
+                text: "Ser referência em assessoria imobiliária na região de Duartina, reconhecida pela excelência e confiança.",
               },
               {
                 icon: Heart,
@@ -92,7 +92,7 @@ const About = () => {
         <div className="container-custom text-center max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Pronto para encontrar seu imóvel?</h2>
           <p className="text-muted-foreground mb-8">
-            Entre em contato conosco e descubra as melhores opções de Garça e região.
+            Entre em contato conosco e descubra as melhores opções de Duartina e região.
           </p>
           <Button asChild size="lg" className="bg-gradient-brand text-brand-foreground shadow-brand hover:opacity-90">
             <Link to="/imoveis">Ver imóveis disponíveis</Link>

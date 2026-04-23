@@ -34,7 +34,7 @@ interface FormState {
 
 const empty: FormState = {
   title: "", type: "casa", status: "venda", price: "",
-  city: "Garça", neighborhood: "", bedrooms: "", bathrooms: "",
+  city: "Duartina", neighborhood: "", bedrooms: "", bathrooms: "",
   parking: "", area: "", description: "", features: "", featured: false,
 };
 
