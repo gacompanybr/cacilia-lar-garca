@@ -71,9 +71,9 @@ const Home = () => {
             <span className="inline-block bg-brand text-brand-foreground text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
               Imobiliária em {CITY}
             </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-5 text-balance">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-5 text-balance">
               Encontre o imóvel <span className="text-brand">dos seus sonhos</span>
-            </h1>
+            </h2>
             <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl">
               Casas, apartamentos, terrenos e imóveis comerciais com atendimento personalizado e transparente.
             </p>
