@@ -66,6 +66,7 @@ const Home = () => {
         ))}
 
         <div className="container-custom relative z-10 py-20">
+          <h1 className="sr-only">Cacilia Aredes Imóveis - Cacilia Imóveis em Duartina/SP</h1>
           <div className="max-w-3xl text-primary-foreground animate-fade-in">
             <span className="inline-block bg-brand text-brand-foreground text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
               Imobiliária em {CITY}
