@@ -36,7 +36,7 @@ const Properties = () => {
   const price = searchParams.get("price") || "";
 
   useEffect(() => {
-    document.title = `Imóveis — ${COMPANY_NAME}`;
+    document.title = "Imóveis em Duartina/SP | Cacilia Aredes Imóveis";
     fetchProperties()
       .then(setProperties)
       .finally(() => setLoading(false));

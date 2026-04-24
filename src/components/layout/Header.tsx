@@ -39,7 +39,7 @@ export const Header = () => {
         <Link to="/" className="flex items-center gap-4 shrink-0" onClick={() => setOpen(false)}>
           <img
             src={logo}
-            alt={`Logo ${COMPANY_NAME}`}
+            alt="Cacilia Aredes Imóveis - Cacilia Imóveis em Duartina SP"
             className="h-20 w-20 md:h-24 md:w-24 object-contain"
             width={1024}
             height={1024}

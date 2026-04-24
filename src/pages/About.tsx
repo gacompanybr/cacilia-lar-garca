@@ -10,7 +10,7 @@ import hero from "@/assets/hero-1.jpg";
 
 const About = () => {
   useEffect(() => {
-    document.title = `Sobre — ${COMPANY_NAME}`;
+    document.title = "Sobre a Cacilia Aredes Imóveis | Cacilia Imóveis em Duartina";
   }, []);
 
   return (

@@ -13,7 +13,7 @@ const Contact = () => {
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
 
   useEffect(() => {
-    document.title = `Contato — ${COMPANY_NAME}`;
+    document.title = "Contato | Cacilia Aredes Imóveis - Duartina/SP";
   }, []);
 
   useEffect(() => {
