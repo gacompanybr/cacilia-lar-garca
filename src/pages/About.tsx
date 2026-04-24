@@ -6,7 +6,7 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { COMPANY_NAME, COMPANY_FULL, CITY, CRECI } from "@/lib/whatsapp";
-import hero from "@/assets/hero-1.jpg";
+import hero from "@/assets/hero-1.webp";
 
 const About = () => {
   useEffect(() => {
