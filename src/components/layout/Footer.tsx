@@ -9,15 +9,19 @@ export const Footer = () => {
       <div className="container-custom py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3 mb-4">
-            <img src={logo} alt={COMPANY_FULL} className="h-14 w-14 object-contain" />
+            <img src={logo} alt="Cacilia Aredes Imóveis - Cacilia Imóveis em Duartina SP" className="h-14 w-14 object-contain" />
             <div>
-              <div className="font-display font-bold text-lg uppercase">{COMPANY_FULL}</div>
+              <div className="font-display font-bold text-lg uppercase">Cacilia Aredes Imóveis</div>
               <div className="text-xs text-brand">CRECI: {CRECI}</div>
             </div>
           </div>
           <p className="text-sm text-primary-foreground/70 max-w-md">
-            Sua melhor escolha para comprar, vender ou alugar imóveis em {CITY} e região.
+            Cacilia Aredes Imóveis, também pesquisada como Cacilia Imóveis em Duartina,
+            é uma corretora de imóveis em Duartina/SP e região.
             Atendimento personalizado e transparente.
+          </p>
+          <p className="text-xs text-primary-foreground/50 mt-3 max-w-md">
+            Cacilia Imóveis em Duartina · Corretora de imóveis em Duartina/SP e região · CRECI {CRECI}
           </p>
         </div>
 
