@@ -34,8 +34,19 @@ const Home = () => {
   useEffect(() => {
     document.title = "Cacilia Imóveis em Duartina | Cacilia Aredes Imóveis";
     const meta = document.querySelector('meta[name="description"]');
-    const desc = "Site oficial da Cacilia Aredes Imóveis, também conhecida como Cacilia Imóveis em Duartina. Encontre casas, terrenos, chácaras e imóveis à venda em Duartina/SP e região.";
+    const desc = "Site oficial da Cacilia Aredes Imóveis, também conhecida como Cacilia Imóveis em Duartina. Corretora de imóveis em Duartina/SP e região com casas, terrenos, chácaras e imóveis à venda.";
     if (meta) meta.setAttribute("content", desc);
+
+    const setCanonical = (href: string) => {
+      let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "canonical";
+        document.head.appendChild(link);
+      }
+      link.href = href;
+    };
+    setCanonical("https://www.caciliaaredesimoveis.com.br/");
   }, []);
 
   return (
