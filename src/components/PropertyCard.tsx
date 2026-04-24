@@ -18,9 +18,6 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
           src={cover}
           alt={property.title}
           loading="lazy"
-          decoding="async"
-          width={800}
-          height={600}
           className="h-full w-full object-cover transition-smooth group-hover:scale-105"
         />
         <div className="absolute top-3 left-3 flex gap-2">

@@ -9,9 +9,9 @@ import { PropertyCard } from "@/components/PropertyCard";
 import { Button } from "@/components/ui/button";
 import { fetchProperties, Property } from "@/lib/properties";
 import { COMPANY_NAME, CITY } from "@/lib/whatsapp";
-import hero1 from "@/assets/hero-1.webp";
-import hero2 from "@/assets/hero-2.webp";
-import heroProperty from "@/assets/property-5.webp";
+import hero1 from "@/assets/hero-1.jpg";
+import hero2 from "@/assets/hero-2.jpg";
+import heroProperty from "@/assets/property-5.jpg";
 
 const heroImages = [hero1, heroProperty, hero2];
 
@@ -60,16 +60,7 @@ const Home = () => {
             key={i}
             className={`absolute inset-0 transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
           >
-            <img
-              src={img}
-              alt=""
-              width={1600}
-              height={900}
-              fetchPriority={i === 0 ? "high" : "low"}
-              loading={i === 0 ? "eager" : "lazy"}
-              decoding="async"
-              className="h-full w-full object-cover"
-            />
+            <img src={img} alt="" className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-hero" />
           </div>
         ))}
