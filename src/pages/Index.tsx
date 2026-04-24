@@ -158,7 +158,6 @@ const Home = () => {
         </section>
       )}
 
-      )}
 
       <section aria-label="Sobre a marca" className="py-6">
         <div className="container-custom">
