@@ -34,8 +34,19 @@ const Home = () => {
   useEffect(() => {
     document.title = "Cacilia Imóveis em Duartina | Cacilia Aredes Imóveis";
     const meta = document.querySelector('meta[name="description"]');
-    const desc = "Site oficial da Cacilia Aredes Imóveis, também conhecida como Cacilia Imóveis em Duartina. Encontre casas, terrenos, chácaras e imóveis à venda em Duartina/SP e região.";
+    const desc = "Site oficial da Cacilia Aredes Imóveis, também conhecida como Cacilia Imóveis em Duartina. Corretora de imóveis em Duartina/SP e região com casas, terrenos, chácaras e imóveis à venda.";
     if (meta) meta.setAttribute("content", desc);
+
+    const setCanonical = (href: string) => {
+      let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "canonical";
+        document.head.appendChild(link);
+      }
+      link.href = href;
+    };
+    setCanonical("https://www.caciliaaredesimoveis.com.br/");
   }, []);
 
   return (
@@ -55,13 +66,14 @@ const Home = () => {
         ))}
 
         <div className="container-custom relative z-10 py-20">
+          <h1 className="sr-only">Cacilia Aredes Imóveis - Cacilia Imóveis em Duartina/SP</h1>
           <div className="max-w-3xl text-primary-foreground animate-fade-in">
             <span className="inline-block bg-brand text-brand-foreground text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
               Imobiliária em {CITY}
             </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-5 text-balance">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-5 text-balance">
               Encontre o imóvel <span className="text-brand">dos seus sonhos</span>
-            </h1>
+            </h2>
             <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl">
               Casas, apartamentos, terrenos e imóveis comerciais com atendimento personalizado e transparente.
             </p>

@@ -14,6 +14,13 @@ const Contact = () => {
 
   useEffect(() => {
     document.title = "Contato | Cacilia Aredes Imóveis - Duartina/SP";
+    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.appendChild(link);
+    }
+    link.href = "https://www.caciliaaredesimoveis.com.br/contato";
   }, []);
 
   useEffect(() => {

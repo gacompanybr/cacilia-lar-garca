@@ -37,6 +37,13 @@ const Properties = () => {
 
   useEffect(() => {
     document.title = "Imóveis em Duartina/SP | Cacilia Aredes Imóveis";
+    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.appendChild(link);
+    }
+    link.href = "https://www.caciliaaredesimoveis.com.br/imoveis";
     fetchProperties()
       .then(setProperties)
       .finally(() => setLoading(false));

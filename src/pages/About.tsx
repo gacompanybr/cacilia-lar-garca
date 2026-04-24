@@ -11,6 +11,13 @@ import hero from "@/assets/hero-1.jpg";
 const About = () => {
   useEffect(() => {
     document.title = "Sobre a Cacilia Aredes Imóveis | Cacilia Imóveis em Duartina";
+    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.appendChild(link);
+    }
+    link.href = "https://www.caciliaaredesimoveis.com.br/sobre";
   }, []);
 
   return (
